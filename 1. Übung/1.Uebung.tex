@@ -51,7 +51,7 @@
 \begin{document}
 	
 	\title{1. Übung}
-	\author{Timo Bergerbusch 344408}
+	\author{Timo Bergerbusch 344408 \\ Andreas Nikulin 332065 \\ Shu Xing 381176}
 	\date{\specialdate\today}
 	\maketitle
 	
@@ -124,12 +124,12 @@
 	\begin{enumerate}
 		\item relational algebra
 			\begin{enumerate}[label=(\alph*)]
-				\item $\pi_{code}(\sigma_{percentage=100\land Continent='Africa'}(encompasses))$
-				\item $\pi_{lakeName}( riverthrough \bowtie_{river=river1} \rho_{river1\leftarrow river}(\sigma_{Country="F"}(located)))$
+				\item $\pi_{country}(\sigma_{percentage=100\land Continent='Africa'}(encompasses))$
+				\item $\pi_{lake}( riverthrough \bowtie_{river=river1} \rho_{river1\leftarrow river}(\sigma_{Country="F"}(located)))$
 				\item $\pi_{name}(sea)  - \pi_{name}(sea \bowtie_{depth1 > depth}(\rho_{name1,depth1}(sea)))$
 				\item $\rho_{CountryWithTheHighestMountain}(\pi_{name}\\
 							(\pi_{name}(Mountain) - \pi_{name}( Mountain \bowtie_{elevation<elevation1}\\ \rho_{name1,mountains1,elevation1,type1,coordinates1}(Mountain))\\
-							\bowtie geo\_Mountain \bowtie Country
+							\bowtie geo\_Mountain \bowtie \rho_{cName\leftarrow name}(Country)
 							)$
 			\end{enumerate}
 		\item SQL queries
