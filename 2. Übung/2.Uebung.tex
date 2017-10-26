@@ -54,7 +54,7 @@
 \begin{document}
 	
 	\title{2. Exercise}
-	\author{Timo Bergerbusch 344408 \\ Andreas Nikulin 332065 \\ Shu Xing 381176}
+	\author{Timo Bergerbusch 344408 \\ Thomas Näveke 311392 \\ Shu Xing 381176}
 	\date{\specialdate\today}
 	\maketitle
 	
@@ -63,17 +63,20 @@
 		\item \begin{definition}[relational completeness]
 			A query language is relationally complete if it is at least as expressive as relational algebra.
 		\end{definition}
-		Methods with Example table A(\underline{$x_1$},$x_2$,$x_3$) and B(\underline{$y_1$},$y_2$,$y_3$) \\
-		\begin{tabular}[c]{l | l | l}
-			method & relational algebra & SQL \\ \hline \hline
-			selection & $\sigma_{x_1 > 0}(A)$ & SELECT * FROM A WHERE A.$x_1$ $>$ 0 \\
-			projection & $\pi_{x_1}(A)$ & SELECT $x_1$ FROM A \\
-			cartesian product & A $\times$ B & SELECT * FROM A, B \\
-			union & $\sigma_{x_1 > 0}(A) \cup \sigma_{x_1 < 0}(A)$ & SELECT * FROM A WHERE A.$x_1$ $>$ 0  UNION \\
-			& & SELECT * FROM A WHERE A.$x_1$ $<$ 0  \\
-			difference & A - A & A MINUS A \\
+		Methods with Example table A(\underline{$x_1$},$y_1$) and B(\underline{$y_1$}) \\
+		\hspace*{-1cm}\begin{tabular}[c]{l | l | l | l}
+			method & RA (Example) & keyword &SQL(Example) \\ \hline \hline
+			selection & $\sigma_{x_1 > 0}(A)$ & WHERE &SELECT * FROM A WHERE A.$x_1$ $>$ 0 \\
+			projection & $\pi_{x_1}(A)$ & SELECT &SELECT $x_1$ FROM A \\
+			cartesian product & A $\times$ B & FROM, CROSS& SELECT * FROM A, B \\
+			union & $\sigma_{x_1 > 0}(A) \cup$ & UNION & SELECT * FROM A WHERE $x_1$ $>$ 0 UNION \\
+			& $\sigma_{x_1 < 0}(A)$ & & SELECT * FROM A WHERE $x_1$ $<$ 0  \\
+			difference & A - A & EXCEPT, NOT IN& SELECT * FROM B WHERE $y_1$ NOT IN A \\
 		\end{tabular}
-		\item TODO %TODO
+		\item \textbf{1. Beispiel}\\
+			  SELECT SUM(salary) FROM works;\\\\
+			  \textbf{2. Beispiel}\\
+			  SELECT COUNT(city) FROM located; 
 		\item Solution Graph:
 			\begin{figure}[H]
 				\centering
