@@ -148,7 +148,8 @@
 			  with $N=15000$ and $B=8$ $\Rightarrow 1+\lceil \log_{8-1}\lceil \frac{15000}{8} \rceil \rceil$ = $1+\lceil \log_7 1875 \rceil = 5 $
 		\item $ 2 = 1+\lceil \log_{B-1}\lceil \frac{15000}{B} \rceil \rceil \Leftrightarrow 1 = \lceil \log_{B-1}\lceil \frac{15000}{B} \rceil \rceil \Leftrightarrow \frac{1}{2}(1+\sqrt{600001}) \le B \Rightarrow 123 \le B$ \\
 		So we need at-least 123 Buffer to be able to sort the file in two passes. %TODO: Umformung aufschreiben
-		\item TODO %TODO
+		\item Since we only use 2+1 Pages in a Two-Way-Sort: $B=3$ and $N=15000$ \\ $\Rightarrow 1+\lceil \log_{3-1}\lceil \frac{15000}{2} \rceil \rceil = 14$ passes 
+			and $ \lceil \frac{15000}{2} \rceil = 7500$ runs
 		
 	\end{enumerate}
 \end{document}
