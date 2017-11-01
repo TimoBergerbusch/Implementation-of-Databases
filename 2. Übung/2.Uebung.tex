@@ -114,7 +114,7 @@
 			$\pi_{pname}( \rho_{p}(works) \bowtie_{p.cname = b.cname \land p.salary > b.salary}$ \\
 			\hspace*{2cm}$ \rho_{b}(works \bowtie_{works.pname = boss.mname} \rho_{pname1\leftarrow pname}(boss) ) )$ \\
 			\textbf{tuple relational calculus}:\\
-			$\{ <w.pname> \mid w \in works \land \exists m \in boss (w.pname = m.pname \land \exists w^\prime \in works ( w^\prime.pname =m.pname \land w.cname = w^\prime.cname \land w.salary > w^\prime.salary ))  \}$ \\
+			$\{ <w.pname> \mid w \in works \land \exists m \in boss (w.pname = m.pname \land \exists w^\prime \in works ( w^\prime.pname =m.mname \land w.cname = w^\prime.cname \land w.salary > w^\prime.salary ))  \}$ \\
 			\textbf{domain relational calculus}: \\
 			$\{ pname \mid \exists cname, salary1, salary2,mname \land works(pname,cname,salary1) \land works(mname, cname, salary2) \land boss(pname, cname) \land salary1 > salary2\}$
 		\item 
@@ -129,7 +129,7 @@
 			\textbf{relational algebra}:\\
 			$\pi_{pname}(works) - \pi_{pname}(\rho_{p_1}(works) \bowtie_{p_1.salary < p_2.salary} \rho_{p_2}(works))0$ \\
 			\textbf{tuple relational calculus}:\\
-			$\{ <w_1.pname> \mid w_1 \in works \land \lnot(\exists w_2 \in works(w_1.cname = w_2.cname \land w_2.salary > w_1.salary ))\} $ \\
+			$\{ <w_1.pname> \mid w_1 \in works \land \lnot(\exists w_2 \in works( w_2.salary > w_1.salary ))\} $ \\
 			\textbf{domain relational calculus}:\\
 			$\{ pname \mid \exists cname, salary_1 \land works(pname,cname,salary_1) \land \lnot(\exists pname_2, salary_2 \land works(pname_2,cname,salary_2) \land salary_2 > salary_1  )\} $ \\
 		\item 
