@@ -1,0 +1,114 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.2cm, right=2.2cm]{geometry}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{changepage}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{datetime}
+\newdateformat{specialdate}{\twodigit{\THEDAY}.\twodigit{\THEMONTH}.\THEYEAR}
+\usepackage{amssymb}
+\usepackage{ifsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{lipsum}  
+
+\newcommand{\blue}[1]{\color{blue}#1\color{black}}
+\newcommand{\red}[1]{\color{red}#1\color{black}}
+\newcommand{\green}[1]{\color{green}#1\color{black}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand\labelenumii{\theenumi.\arabic{enumii}.}
+
+\begin{document}
+	
+	\title{3. Exercise}
+	\author{Timo Bergerbusch 344408 \\ Thomas Näveke 311392 \\ Shu Xing 381176}
+	\date{\specialdate\today}
+	\maketitle
+	
+	\section*{Exercise 3.1}
+	\subsection*{1. a)}
+	
+		$\blue{\pi_{A,B}(R)} \bowtie \green{\pi_{B,C}}(\red{\pi_{A,C}(\sigma_{B=1}(R))} \bowtie \blue{\pi_{A,B}(R)})$ \\\\
+		$\blue{S_1} := \{ [a,b] \mid \exists c \> R(a,b, c)\}$\\
+		$\red{S_2} := \{ [a,c] \mid \exists a,c \> R(a,1,c)\}$\\
+		$\green{\pi_{B=1}(S_2 \bowtie S_1)} := \{ [b,c] \mid \exists a,c_1,c_2 \> R(a,b,c_1)\land R(a,1,c_2) \}$ \\
+		Insgesamt $:= \{ [a,b,c] \mid \exists a_1,c_1,c_2( \> R(a,b,c_1) \land R(a_1,1,c) \land R(a_1,b,c_2)\}$
+	\subsection*{1.b)}
+		\begin{figure}[H]
+%			\centering
+			\hspace{1in}
+			\begin{tabular}{c|c|c|c}
+				$T_1$ & & & \\ \hline
+				$a$ & $b$ & $c_1$ & R \\
+				$a_1$ & $1$ & $c$ & R \\
+				$a_1$ & $b$ & $c_2$ & R \\
+			\end{tabular}
+		\end{figure}
+	\subsection*{2)}
+		
+		$h_1: T_2 \rightarrow T_1: a\rightarrow a, b \rightarrow b, a_5 \rightarrow a_1, b_5 \rightarrow b_1, c_4 \rightarrow c_1$\\
+		$\Rightarrow T_2 \subseteq T_1\qquad(1)$\\
+		\\
+		$h_2: T_1 \rightarrow T_2: a\rightarrow a, b \rightarrow b, b_1 \rightarrow b, c_1 \rightarrow c_4, a_1 \rightarrow a, b_2 \rightarrow b_5, c_2 \rightarrow c_4, b_3 \rightarrow b_5, c_3 \rightarrow  c_4$\\
+		$\Rightarrow T_1 \subseteq T_2\qquad(2)$\\
+		\\		
+		$(1) \text{\&}(2) \Rightarrow T_1 \equiv T_2$
+		
+	\section*{Exercise 3.2}
+		
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
