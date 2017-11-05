@@ -90,8 +90,44 @@
 		$\Rightarrow T_1 \subseteq T_2\qquad(2)$\\
 		\\		
 		$(1) \text{\&}(2) \Rightarrow T_1 \equiv T_2$
-		
+	
+	\newpage
+	
 	\section*{Exercise 3.2}
+	Given 16 buffer pages (B) and :
+	\begin{itemize}
+		\item Album has a size of 10.000 pages (M), 40 bytes record size ($s_1$) and 100 tuples/page ($p_A$)
+		\item Track has a size of 200.000 pages (N), 30 bytes record size ($s_2$) and 80 tuples/page ($p_T$)
+	\end{itemize}
+	\subsection*{1)}		
+		Since the simple nested loop join is a double iteration over both relations the I/O requirements can be calculated as follows:\\
+		\begin{figure}[H]
+			\centering
+			$M+p_A \cdot M \cdot N = 10.000 + 100 \cdot 10.000 \cdot 200.000 = 200.000.010.000$ I/Os
+		\end{figure}
+	\subsection*{2)}
+		Since the block nested loop join uses 1 input and 1 output buffer the number of I/Os can be calculated with the following formula:
+		\begin{figure}[H]
+			\centering
+			$M + \lceil \frac{M}{B-2} \rceil \cdot N = 10.000 + \lceil \frac{10.000}{16-2} \rceil \cdot 200.000 = 143.060.000$
+		\end{figure}
+	\subsection*{3)}
+		Similarities:
+		\begin{itemize}
+			\item double loop schema
+		\end{itemize}
+		Differences:
+		\begin{itemize}
+			\item usage of buffer pages 
+			\item number of \textit{outer} elements in the memory
+			\item hashing used in the block nested loop
+		\end{itemize}
+	
+		Explanation:\\
+		Lets define the outer loop to be over E and the inner loop to be over T.\\
+		The \textit{block nested loop join} loads up to $B-2$ pages of E into the memory. These blocks get stored in a hash table. Now every input of a page from T can be used via one of the two reserved pages. After hash probing the input, if there is any match in a block of Es, we can reduce the number of scanned Es per T and therefore reduce I/Os.
+		
+	\section*{Exercise 3.3}
 		
 \end{document}
 
