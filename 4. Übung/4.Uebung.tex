@@ -33,7 +33,7 @@
 \usepackage[utf8]{inputenc}
 \newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
 \usepackage{tikz}
-\usetikzlibrary{positioning}
+\usetikzlibrary{fit,arrows,calc,positioning}
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{float}
@@ -82,12 +82,12 @@
 	$\Rightarrow$ $T_1 \subset T_2$, but $T_2 \not\subseteq T_1$ and therefore $T_1 \not\equiv T_2$
 	
 	\subsection*{\underline{$T_2$ and $T_3$}}
-	\subsubsection*{$T_2 \subseteq T_3$?}
+	\subsubsection*{$T_2 \subseteq T_3$?} %TODO
 %	Not possible. We have to map $b_3 \rightarrowtail a_2$ because no other element occurs twice on the right side of $T_2$ and $T_3$. Mapping to different (like $b_1 and a_2$) to $a_2$ won't work since we need 6 different elements in both tableaux. But this mapping would lead to $ (a_2, X)$ in the first row. Such a tuple is not contained in $T_2$ for any $X$. So there exists no function to map $T_3$ onto $T_2$. $\Rightarrow T_2 \not\subseteq T_3$
-	\subsubsection*{$T_3 \subseteq T_3$?}
+	\subsubsection*{$T_3 \subseteq T_3$?} %TODO
 %	Not possible. We have to map $b_2 \rightarrowtail b_1$, because of the same reason as above. Since we now have the $6^{\text{th}}$ row as $(h(b_3), b_1)$ we see that we have to map $b_3 \rightarrowtail b_4$ to remain validity with $T_3$s $3^{\text{rd}}$ line. But this leads to $(h(a_1),b_4)$ in $T_2$s $3^{\text{rd}}$ row which has no corresponding tuple in $T_3$. So this can not be a valid mapping function. $\Rightarrow T_3 \not\subseteq T_2$\\
 %	
-	\subsubsection*{Overall}
+	\subsubsection*{Overall} %TODO
 %	$\Rightarrow$ $T_2\not\subseteq T_3$, $T_3 \not\subseteq T_2$ and therefore especially $T_2 \not\equiv T_3$ 
 	
 	\subsection*{\underline{$T_1$ and $T_3$}}
@@ -100,6 +100,78 @@
 	
 	\section*{2.}
 	
+	\section*{Exercise 4.2}
+	\subsection*{1.a)}
+	$\{ <e.EmployeeId,e.LastName> \mid e \in Employee \land \exists c_1 \in Customer \land c_1.SupportedRepId = e.EmployeeId \land \exists c_2 \in Customer \land c_2.SupportRepId = e.EmployeeId \land c_1.City = c_2.City \land c_1 \neq c_2 \}$
+	
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[every node/.style={anchor=west, minimum width=4cm}]
+			\node[draw, rectangle] (v1) {$e\in Employee$};
+			
+			\node[draw, rectangle, below = of v1] (v2) {$\exists c_1\in Customer$};
+			
+			\node[draw, rectangle, below = of v2] (v3) {$\exists c_2\in Customer$};
+			
+			\draw[->, thick,anchor=west] (v1) edge node {$e.EmployeeId = c_1.SupportRepId$} (v2) ;
+			
+			\draw[->, thick,anchor=west] (v3) edge node {$c_1.city=c_1.city \land c_1 \neq c_2$} (v2);
+			
+			\draw[->, thick, anchor = west] (v1) -| ++(-3,-0.125) node[pos=5.5, left]{$e.EmployeeId=c_2.SupportRepId$} |- (v3);
+		\end{tikzpicture}
+	\end{figure}
+
+	This graph is cycle free, which means the query is optimizable using semi-joins.
+
+	\subsection*{1.b)}
+	$\{<t.name, t.composer> \mid t \in Track \land \exists g\in Genre \land g.GenreId=t.GenreId \land g.Name="Rock" \land \exists art\in Artist \land \exists alb \in Album \land alb.ArtistId=art.ArtistId \land t.AlbumId=alb.AlbumId \land t.Composer=art.Name\}$
+	
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[every node/.style={anchor=west, minimum width=4cm}]
+		\node[draw, rectangle] (v1) {$t \in Track$};
+		
+		\node[draw, rectangle, right =5cm of v1] (v2) {$\exists g \in Genre$};
+		
+		\node[draw, rectangle, below = of v1] (v3) {$\exists art \in Artist$};
+		
+		\node[draw, rectangle, below = of v3] (v4) {$\exists alb \in Album$};
+		
+		\draw[->, thick,anchor=west, align =left] (v1) edge node[above] {$t.GenreId = g.GenreId$\\$ \land  g.Name="Rock"$} (v2) ;
+		
+		\draw[->, thick,anchor=east] (v1) edge node {$art.Name=t.Composer$} (v3);
+		
+		\draw[->, thick,anchor=west] (v3) edge node {$art.ArtistId=alb.ArtistId$} (v4);
+		
+		\draw[->, thick,anchor=west] (v4.west) -| ++(-3,0.35) node[pos = 5,above]{$alb.AlbumId=t.AlbumId$} |- (v1.west);
+		\end{tikzpicture}
+	\end{figure}
+
+	This Graph has a cycle. This means the query is not optimizable using semi-joins.
+	
+	\subsection*{2.}
+	$\{<t.Name> \mid t\in Track \land t.Miliseconds \le 90000 \land \exists g \in Genre \land t.GenreId=t.GenreId \land g.Name="Rock" \land \exists m\in MediaType \land t.MediaTypeId=m.MediaTypeid \land m.Name = "MPEG audio file"\}$
+	
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[every node/.style={anchor=west, minimum width=4cm}]
+		\node[draw, rectangle] (v1) {$t \in Track$};
+		
+		\node[draw, rectangle, right =5cm of v1] (v2) {$\exists g \in Genre$};
+		
+		\node[draw, rectangle, below = 3cm of v1] (v3) {$\exists m \in MediaType$};
+		
+%		\node[draw, rectangle, below = of v3] (v4) {$\exists alb \in Album$};
+		
+		\draw[->, thick,anchor=west, align =left] (v1) edge node[above] {$t.GenreId = g.GenreId$\\$ \land  g.Name="Rock"$} (v2) ;
+		
+		\draw[->, thick,anchor=east, align = left] (v1) edge node {$t.MediaTypeId = m.MediaTypeId \land$ \\ $m.Name="MPEG audio file"$} (v3);
+		
+		
+		\end{tikzpicture}\\
+		TODO: es fehlt das mit den $\le$90000ms %TODO
+	\end{figure}
+	The graph is cycle free, which means it can be optimized using semi-joins.
 \end{document}
 
 
