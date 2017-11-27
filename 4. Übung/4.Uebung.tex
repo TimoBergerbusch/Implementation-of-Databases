@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.2cm, right=2.2cm]{geometry}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{changepage}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{datetime}
+\newdateformat{specialdate}{\twodigit{\THEDAY}.\twodigit{\THEMONTH}.\THEYEAR}
+\usepackage{amssymb}
+\usepackage{ifsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{lipsum}  
+
+\newcommand{\blue}[1]{\color{blue}#1\color{black}}
+\newcommand{\red}[1]{\color{red}#1\color{black}}
+\newcommand{\green}[1]{\color{green}#1\color{black}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand\labelenumii{\theenumi.\arabic{enumii}.}
+
+\begin{document}
+	
+	\title{4. Exercise}
+	\author{Timo Bergerbusch 344408 \\ Thomas Näveke 311392 \\ Shu Xing 381176}
+	\date{\specialdate\today}
+	\maketitle
+	
+	\section*{Exercise 4.1}
+	\subsection*{1.}
+	\subsection*{\underline{$T_1$ and $T_2$}}
+	\subsubsection*{$T_1 \subseteq T_2$?}
+	Find mapping $h: T_2 \rightarrow T_1, x \rightarrowtail 
+		\begin{cases}
+			b_3 & x=b_1 \\
+			5 & x=b_2 \\
+			b_4 & x=b_3 \\
+			b_3 & x=b_4 \\
+			a_1 & x=a_1 \\
+			a_2 & x=a_2 \\
+		\end{cases}$
+		$\Rightarrow T_1 \subseteq T_2$
+	\subsubsection*{$T_2 \subseteq T_1$?}
+	Impossible since we would have to map the constant 5 to an other constant and $T_2$ does not contain a constant. So $T_2 \not \subseteq T_1$
+	\subsubsection*{Overall}
+	$\Rightarrow$ $T_1 \subset T_2$, but $T_2 \not\subseteq T_1$ and therefore $T_1 \not\equiv T_2$
+	
+	\subsection*{\underline{$T_2$ and $T_3$}}
+	\subsubsection*{$T_2 \subseteq T_3$?}
+%	Not possible. We have to map $b_3 \rightarrowtail a_2$ because no other element occurs twice on the right side of $T_2$ and $T_3$. Mapping to different (like $b_1 and a_2$) to $a_2$ won't work since we need 6 different elements in both tableaux. But this mapping would lead to $ (a_2, X)$ in the first row. Such a tuple is not contained in $T_2$ for any $X$. So there exists no function to map $T_3$ onto $T_2$. $\Rightarrow T_2 \not\subseteq T_3$
+	\subsubsection*{$T_3 \subseteq T_3$?}
+%	Not possible. We have to map $b_2 \rightarrowtail b_1$, because of the same reason as above. Since we now have the $6^{\text{th}}$ row as $(h(b_3), b_1)$ we see that we have to map $b_3 \rightarrowtail b_4$ to remain validity with $T_3$s $3^{\text{rd}}$ line. But this leads to $(h(a_1),b_4)$ in $T_2$s $3^{\text{rd}}$ row which has no corresponding tuple in $T_3$. So this can not be a valid mapping function. $\Rightarrow T_3 \not\subseteq T_2$\\
+%	
+	\subsubsection*{Overall}
+%	$\Rightarrow$ $T_2\not\subseteq T_3$, $T_3 \not\subseteq T_2$ and therefore especially $T_2 \not\equiv T_3$ 
+	
+	\subsection*{\underline{$T_1$ and $T_3$}}
+	\subsubsection*{$T_1 \subseteq T_3$?}
+%	In $T_3$ we have $(b_3,b_2)$ and $(b_2,b_3)$ so every mapping $h:T_3 \rightarrow T_1$ will create the tuples $(h(b_3),h(b_2))$ and $(h(b_2), h(b_3))$. $T_1$ does not have two elements $x,y$ such that $(x,y)$ and $(y,x)$ are in $T_1$. So there can not exists a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \not\subseteq T_3$
+	\subsubsection*{$T_3 \subseteq T_3$?}
+	Analogously to $T_2 \subseteq T_1$ we would have to map the constant 5 to an other constant and $T_3$ does not contain a constant. So $T_3 \not \subseteq T_1$
+	\subsubsection*{Overall}
+	$\Rightarrow$ $T_1\not\subseteq T_3$, $T_3 \not\subseteq T_1$ and therefore especially $T_1 \not\equiv T_3$ 
+	
+	\section*{2.}
+	
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
