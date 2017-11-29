@@ -84,6 +84,7 @@
 	\subsection*{\underline{$T_2$ and $T_3$}}
 	\subsubsection*{$T_2 \subseteq T_3$?} %TODO
 %	Not possible. We have to map $b_3 \rightarrowtail a_2$ because no other element occurs twice on the right side of $T_2$ and $T_3$. Mapping to different (like $b_1 and a_2$) to $a_2$ won't work since we need 6 different elements in both tableaux. But this mapping would lead to $ (a_2, X)$ in the first row. Such a tuple is not contained in $T_2$ for any $X$. So there exists no function to map $T_3$ onto $T_2$. $\Rightarrow T_2 \not\subseteq T_3$
+	
 	\subsubsection*{$T_3 \subseteq T_3$?} %TODO
 %	Not possible. We have to map $b_2 \rightarrowtail b_1$, because of the same reason as above. Since we now have the $6^{\text{th}}$ row as $(h(b_3), b_1)$ we see that we have to map $b_3 \rightarrowtail b_4$ to remain validity with $T_3$s $3^{\text{rd}}$ line. But this leads to $(h(a_1),b_4)$ in $T_2$s $3^{\text{rd}}$ row which has no corresponding tuple in $T_3$. So this can not be a valid mapping function. $\Rightarrow T_3 \not\subseteq T_2$\\
 %	
@@ -99,6 +100,67 @@
 	$\Rightarrow$ $T_1\not\subseteq T_3$, $T_3 \not\subseteq T_1$ and therefore especially $T_1 \not\equiv T_3$ 
 	
 	\section*{2.}
+	\subsection*{$T_1$:}
+	$T_1$ is minimal, because if we delete any row and so create $T^\prime$ we can not have a function $h:T\rightarrow T'$ such that $T'\subseteq T$
+	
+	\subsection*{$T_2$:}
+	\begin{enumerate}
+		\item delete row $(b_4, a_2)$, since we have a function $h_1$, with $h_1(x) =
+			\begin{cases}
+				b_1 & \text{if }x=b_4\\
+				x & \text{if }x \neq b_4
+			\end{cases}$
+			\begin{figure}[H]
+				\centering
+				New Tableau $T_1^\prime$: \\
+				\begin{tabular}{c c c}
+					\hline
+					$a_1$ & $a_2$ & \\ \hline
+					$b_1$ & $a_2$ & (R) \\
+					$a_1$ & $b_3$ & (R) \\
+					$b_2$ & $b_4$ & (R) \\
+					$b_2$ & $b_1$ & (R) \\
+					$b_3$ & $b_2$ & (R) \\
+				\end{tabular}
+			\end{figure}
+		\item delete row $(a_1, b_3)$, since we have a function $h_2$, with $h_2(x) = 
+			\begin{cases}
+				b_1 & \text{if }x=a_1 \\
+				a_2 & \text{if }x=b_3 \\
+				x & else \\
+			\end{cases}
+			$
+			\begin{figure}[H]
+				\centering
+				New Tableau $T_1^{''}$: \\
+				\begin{tabular}{c c c}
+					\hline
+					$a_1$ & $a_2$ & \\ \hline
+					$b_1$ & $a_2$ & (R) \\
+					$b_2$ & $b_4$ & (R) \\
+					$b_2$ & $b_1$ & (R) \\
+					$b_3$ & $b_2$ & (R) \\
+				\end{tabular}
+			\end{figure}
+		\item delete row $(b_2, b_4)$, since we have a function $h_2$, with $h_3(x) = 
+			\begin{cases}
+				b_1 & \text{if }x=b_4 \\
+				x & else \\
+			\end{cases}
+			$
+			\begin{figure}[H]
+				\centering
+				New Tableau $T_1^{'''}$: \\
+				\begin{tabular}{c c c}
+					\hline
+					$a_1$ & $a_2$ & \\ \hline
+					$b_1$ & $a_2$ & (R) \\
+					$b_2$ & $b_1$ & (R) \\
+					$b_3$ & $b_2$ & (R) \\
+				\end{tabular}
+			\end{figure}
+		\item This table $T_1^{'''}$, which es derived by $h_3(h_2(h_1(T)))$, is now minimal and equivalent
+	\end{enumerate}
 	
 	\section*{Exercise 4.2}
 	\subsection*{1.a)}
