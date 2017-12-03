@@ -77,7 +77,7 @@
 		\end{cases}$
 		$\Rightarrow T_1 \subseteq T_2$
 	\subsubsection*{$T_2 \subseteq T_1$?}
-	Impossible since we would have to map the constant 5 to an other constant and $T_2$ does not contain a constant. So $T_2 \not \subseteq T_1$
+	Impossible since we would have to map the constant 5 to another constant and $T_2$ does not contain a constant. So $T_2 \not \subseteq T_1$
 	\subsubsection*{Overall}
 	$\Rightarrow$ $T_1 \subset T_2$, but $T_2 \not\subseteq T_1$ and therefore $T_1 \not\equiv T_2$
 	
@@ -89,7 +89,7 @@
 	b3\rightarrow b4\\
 	b2\rightarrow b3\\
 	b1\rightarrow a1$, but then for (b4, b1) in $T_3$ we cannot find a matched instance in $T_1$\\
-	So there can not exists a function $h: T_3 \rightarrow T_2$. $\Rightarrow T_2 \not\subseteq T_3$	
+	So there cannot exist a function $h: T_3 \rightarrow T_2$. $\Rightarrow T_2 \not\subseteq T_3$	
 	
 	\subsubsection*{$T_3 \subseteq T_2$?}	
 	When we map $T_2$ to $T_3$:\\
@@ -100,7 +100,7 @@
 	b3\rightarrow b2\\
 	b2\rightarrow b2$ (or b1)\\
 	but then for (b3,b2) in $T_2$ we cannot find a matched instance in $T_3$\\
-	So there can not exists a function $h: T_2 \rightarrow T_3$. $\Rightarrow T_3 \not\subseteq T_2$
+	So there cannot exist a function $h: T_2 \rightarrow T_3$. $\Rightarrow T_3 \not\subseteq T_2$
 	\subsubsection*{Overall}
 	$\Rightarrow$ $T_2\not\subseteq T_3$, $T_3 \not\subseteq T_2$ and therefore especially $T_2 \not\equiv T_3$ 
 
@@ -113,7 +113,7 @@
 	b2\rightarrow b4\\
 	b1\rightarrow a1\\
 	b2\rightarrow 5$, because of (b2, b3) in $T_3$ and b3$\rightarrow$ b3, so conflict with b2$\rightarrow$ b4 \\
-	So there can not exists a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \not\subseteq T_3$
+	So there cannot exist a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \not\subseteq T_3$
 
 	\subsubsection*{$T_3 \subseteq T_3$?}
 	Analogously to $T_2 \subseteq T_1$ we would have to map the constant 5 to an other constant and $T_3$ does not contain a constant. So $T_3 \not \subseteq T_1$
@@ -204,7 +204,7 @@
 	\begin{figure}[H]
 		\centering
 		\begin{tikzpicture}[every node/.style={anchor=west, minimum width=4cm}]
-		\node[draw, rectangle] (v1) {$t \in Track$};
+		\node[draw, rectangle] (v1) {$t \in Track \land t.Miliseconds \le 90000$};
 		
 		\node[draw, rectangle, right =5cm of v1] (v2) {$\exists g \in Genre$};
 		
@@ -218,7 +218,6 @@
 		
 		
 		\end{tikzpicture}\\
-		TODO: es fehlt das mit den $\le$90000ms %TODO
 	\end{figure}
 	The graph is cycle free, which means it can be optimized using semi-joins.
 	
