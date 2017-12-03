@@ -133,56 +133,21 @@
 			\end{cases}$
 			\begin{figure}[H]
 				\centering
-				New Tableau $T_1^\prime$: \\
+				New Tableau $T_2^\prime$: \\
 				\begin{tabular}{c c c}
 					\hline
 					$a_1$ & $a_2$ & \\ \hline
 					$b_1$ & $a_2$ & (R) \\
 					$a_1$ & $b_3$ & (R) \\
-					$b_2$ & $b_4$ & (R) \\
 					$b_2$ & $b_1$ & (R) \\
 					$b_3$ & $b_2$ & (R) \\
 				\end{tabular}
-			\end{figure}
-		\item delete row $(a_1, b_3)$, since we have a function $h_2$, with $h_2(x) = 
-			\begin{cases}
-				%TODO maybe resulting row?
-				b_1 & \text{if }x=a_1 \\
-				a_2 & \text{if }x=b_3 \\
-				x & else \\
-			\end{cases}
-			$
-			\begin{figure}[H]
-				\centering
-				New Tableau $T_1^{''}$: \\
-				\begin{tabular}{c c c}
-					\hline
-					$a_1$ & $a_2$ & \\ \hline
-					$b_1$ & $a_2$ & (R) \\
-					$b_2$ & $b_4$ & (R) \\
-					$b_2$ & $b_1$ & (R) \\
-					$b_3$ & $b_2$ & (R) \\
-				\end{tabular}
-			\end{figure}
-		\item delete row $(b_2, b_4)$, since we have a function $h_2$, with $h_3(x) = 
-			\begin{cases}
-				b_1 & \text{if }x=b_4 \\
-				x & else \\
-			\end{cases}
-			$
-			\begin{figure}[H]
-				\centering
-				New Tableau $T_1^{'''}$: \\
-				\begin{tabular}{c c c}
-					\hline
-					$a_1$ & $a_2$ & \\ \hline
-					$b_1$ & $a_2$ & (R) \\
-					$b_2$ & $b_1$ & (R) \\
-					$b_3$ & $b_2$ & (R) \\
-				\end{tabular}
-			\end{figure}
-		\item This table $T_1^{'''}$, which es derived by $h_3(h_2(h_1(T)))$, is now minimal and equivalent
+			\end{figure}	
+		\item we can't minimize $T_2''$ any further, so $T_2''$ is the minimal tableau
 	\end{enumerate}
+
+	\subsection*{$T_3$:}
+		$T_3$ is minimal, because if we delete any row and so create $T^\prime$ we can not have a function $h:T\rightarrow T'$ such that $T'\subseteq T$
 	
 	\section*{Exercise 4.2}
 	\subsection*{1.a)}
