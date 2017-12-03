@@ -82,51 +82,38 @@
 	$\Rightarrow$ $T_1 \subset T_2$, but $T_2 \not\subseteq T_1$ and therefore $T_1 \not\equiv T_2$
 	
 	\subsection*{\underline{$T_2$ and $T_3$}}
-	\subsubsection*{$T_2 \subseteq T_3$?} %TODO
-%	Not possible. We have to map $b_3 \rightarrowtail a_2$ because no other element occurs twice on the right side of $T_2$ and $T_3$. Mapping to different (like $b_1 and a_2$) to $a_2$ won't work since we need 6 different elements in both tableaux. But this mapping would lead to $ (a_2, X)$ in the first row. Such a tuple is not contained in $T_2$ for any $X$. So there exists no function to map $T_3$ onto $T_2$. $\Rightarrow T_2 \not\subseteq T_3$
-<<<<<<< HEAD
-<<<<<<< HEAD
-When we map $T_3$ to $T_2$:\\
-$a1\rightarrow a1\\
-a2\rightarrow a2\\
-b3\rightarrow b4\\
-b2\rightarrow b3\\
-b1\rightarrow a1$, but then for (b4, b1) in $T_3$ we cannot find a matched instance in $T_1$\\
-So there can not exists a function $h: T_3 \rightarrow T_2$. $\Rightarrow T_2 \not\subseteq T_3$	
+	\subsubsection*{$T_2 \subseteq T_3$?}
+	When we map $T_3$ to $T_2$:\\
+	$a1\rightarrow a1\\
+	a2\rightarrow a2\\
+	b3\rightarrow b4\\
+	b2\rightarrow b3\\
+	b1\rightarrow a1$, but then for (b4, b1) in $T_3$ we cannot find a matched instance in $T_1$\\
+	So there can not exists a function $h: T_3 \rightarrow T_2$. $\Rightarrow T_2 \not\subseteq T_3$	
 	
-	\subsubsection*{$T_3 \subseteq T_2$?} %TODO
-%	Not possible. We have to map $b_2 \rightarrowtail b_1$, because of the same reason as above. Since we now have the $6^{\text{th}}$ row as $(h(b_3), b_1)$ we see that we have to map $b_3 \rightarrowtail b_4$ to remain validity with $T_3$s $3^{\text{rd}}$ line. But this leads to $(h(a_1),b_4)$ in $T_2$s $3^{\text{rd}}$ row which has no corresponding tuple in $T_3$. So this can not be a valid mapping function. $\Rightarrow T_3 \not\subseteq T_2$\\
-%	
-When we map $T_2$ to $T_3$:\\
-$a1\rightarrow a1\\
-a2\rightarrow a2\\
-b4\rightarrow b3\\
-b1\rightarrow b4\\
-b3\rightarrow b2\\
-b2\rightarrow b2$ (or b1)\\
-but then for (b3,b2) in $T_2$ we cannot find a matched instance in $T_3$\\
-So there can not exists a function $h: T_2 \rightarrow T_3$. $\Rightarrow T_3 \not\subseteq T_2$
-	\subsubsection*{Overall} %TODO
+	\subsubsection*{$T_3 \subseteq T_2$?}	
+	When we map $T_2$ to $T_3$:\\
+	$a1\rightarrow a1\\
+	a2\rightarrow a2\\
+	b4\rightarrow b3\\
+	b1\rightarrow b4\\
+	b3\rightarrow b2\\
+	b2\rightarrow b2$ (or b1)\\
+	but then for (b3,b2) in $T_2$ we cannot find a matched instance in $T_3$\\
+	So there can not exists a function $h: T_2 \rightarrow T_3$. $\Rightarrow T_3 \not\subseteq T_2$
+	\subsubsection*{Overall}
 	$\Rightarrow$ $T_2\not\subseteq T_3$, $T_3 \not\subseteq T_2$ and therefore especially $T_2 \not\equiv T_3$ 
-	
-	\subsubsection*{$T_3 \subseteq T_3$?} %TODO
-%	Not possible. We have to map $b_2 \rightarrowtail b_1$, because of the same reason as above. Since we now have the $6^{\text{th}}$ row as $(h(b_3), b_1)$ we see that we have to map $b_3 \rightarrowtail b_4$ to remain validity with $T_3$s $3^{\text{rd}}$ line. But this leads to $(h(a_1),b_4)$ in $T_2$s $3^{\text{rd}}$ row which has no corresponding tuple in $T_3$. So this can not be a valid mapping function. $\Rightarrow T_3 \not\subseteq T_2$\\
-%	
-	\subsubsection*{Overall} %TODO
-%	$\Rightarrow$ $T_2\not\subseteq T_3$, $T_3 \not\subseteq T_2$ and therefore especially $T_2 \not\equiv T_3$ 
-	
+
 	\subsection*{\underline{$T_1$ and $T_3$}}
 	\subsubsection*{$T_1 \subseteq T_3$?}
-%	In $T_3$ we have $(b_3,b_2)$ and $(b_2,b_3)$ so every mapping $h:T_3 \rightarrow T_1$ will create the tuples $(h(b_3),h(b_2))$ and $(h(b_2), h(b_3))$. $T_1$ does not have two elements $x,y$ such that $(x,y)$ and $(y,x)$ are in $T_1$. So there can not exists a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \not\subseteq T_3$
-
-When we map $T_3$ to $T_1$:\\
-$a1\rightarrow a1\\
-a2\rightarrow a2\\
-b3\rightarrow b3\\
-b2\rightarrow b4\\
-b1\rightarrow a1\\
-b2\rightarrow 5$, because of (b2, b3) in $T_3$ and b3$\rightarrow$ b3, so conflict with b2$\rightarrow$ b4 \\
-So there can not exists a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \not\subseteq T_3$
+	When we map $T_3$ to $T_1$:\\
+	$a1\rightarrow a1\\
+	a2\rightarrow a2\\
+	b3\rightarrow b3\\
+	b2\rightarrow b4\\
+	b1\rightarrow a1\\
+	b2\rightarrow 5$, because of (b2, b3) in $T_3$ and b3$\rightarrow$ b3, so conflict with b2$\rightarrow$ b4 \\
+	So there can not exists a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \not\subseteq T_3$
 
 	\subsubsection*{$T_3 \subseteq T_3$?}
 	Analogously to $T_2 \subseteq T_1$ we would have to map the constant 5 to an other constant and $T_3$ does not contain a constant. So $T_3 \not \subseteq T_1$
@@ -159,9 +146,7 @@ So there can not exists a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \n
 			\end{figure}
 		\item delete row $(a_1, b_3)$, since we have a function $h_2$, with $h_2(x) = 
 			\begin{cases}
-				%TODO
-				b_1 & \text{if }x=a_1 ???\\
-				b_1 & \text{if }x=a_1 \\
+				%TODO maybe resulting row?
 				b_1 & \text{if }x=a_1 \\
 				a_2 & \text{if }x=b_3 \\
 				x & else \\
