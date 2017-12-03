@@ -108,25 +108,17 @@ but then for (b3,b2) in $T_2$ we cannot find a matched instance in $T_3$\\
 So there can not exists a function $h: T_2 \rightarrow T_3$. $\Rightarrow T_3 \not\subseteq T_2$
 	\subsubsection*{Overall} %TODO
 	$\Rightarrow$ $T_2\not\subseteq T_3$, $T_3 \not\subseteq T_2$ and therefore especially $T_2 \not\equiv T_3$ 
-=======
-=======
->>>>>>> b8f283e1ee75d57863bf0f35de0d0914cb4ae613
 	
 	\subsubsection*{$T_3 \subseteq T_3$?} %TODO
 %	Not possible. We have to map $b_2 \rightarrowtail b_1$, because of the same reason as above. Since we now have the $6^{\text{th}}$ row as $(h(b_3), b_1)$ we see that we have to map $b_3 \rightarrowtail b_4$ to remain validity with $T_3$s $3^{\text{rd}}$ line. But this leads to $(h(a_1),b_4)$ in $T_2$s $3^{\text{rd}}$ row which has no corresponding tuple in $T_3$. So this can not be a valid mapping function. $\Rightarrow T_3 \not\subseteq T_2$\\
 %	
 	\subsubsection*{Overall} %TODO
 %	$\Rightarrow$ $T_2\not\subseteq T_3$, $T_3 \not\subseteq T_2$ and therefore especially $T_2 \not\equiv T_3$ 
-<<<<<<< HEAD
->>>>>>> b8f283e1ee75d57863bf0f35de0d0914cb4ae613
-=======
->>>>>>> b8f283e1ee75d57863bf0f35de0d0914cb4ae613
 	
 	\subsection*{\underline{$T_1$ and $T_3$}}
 	\subsubsection*{$T_1 \subseteq T_3$?}
 %	In $T_3$ we have $(b_3,b_2)$ and $(b_2,b_3)$ so every mapping $h:T_3 \rightarrow T_1$ will create the tuples $(h(b_3),h(b_2))$ and $(h(b_2), h(b_3))$. $T_1$ does not have two elements $x,y$ such that $(x,y)$ and $(y,x)$ are in $T_1$. So there can not exists a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \not\subseteq T_3$
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 When we map $T_3$ to $T_1$:\\
 $a1\rightarrow a1\\
 a2\rightarrow a2\\
@@ -135,10 +127,7 @@ b2\rightarrow b4\\
 b1\rightarrow a1\\
 b2\rightarrow 5$, because of (b2, b3) in $T_3$ and b3$\rightarrow$ b3, so conflict with b2$\rightarrow$ b4 \\
 So there can not exists a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \not\subseteq T_3$
-=======
->>>>>>> b8f283e1ee75d57863bf0f35de0d0914cb4ae613
-=======
->>>>>>> b8f283e1ee75d57863bf0f35de0d0914cb4ae613
+
 	\subsubsection*{$T_3 \subseteq T_3$?}
 	Analogously to $T_2 \subseteq T_1$ we would have to map the constant 5 to an other constant and $T_3$ does not contain a constant. So $T_3 \not \subseteq T_1$
 	\subsubsection*{Overall}
@@ -170,15 +159,10 @@ So there can not exists a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \n
 			\end{figure}
 		\item delete row $(a_1, b_3)$, since we have a function $h_2$, with $h_2(x) = 
 			\begin{cases}
-<<<<<<< HEAD
-<<<<<<< HEAD
+				%TODO
 				b_1 & \text{if }x=a_1 ???\\
-=======
 				b_1 & \text{if }x=a_1 \\
->>>>>>> b8f283e1ee75d57863bf0f35de0d0914cb4ae613
-=======
 				b_1 & \text{if }x=a_1 \\
->>>>>>> b8f283e1ee75d57863bf0f35de0d0914cb4ae613
 				a_2 & \text{if }x=b_3 \\
 				x & else \\
 			\end{cases}
@@ -287,24 +271,22 @@ So there can not exists a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \n
 		TODO: es fehlt das mit den $\le$90000ms %TODO
 	\end{figure}
 	The graph is cycle free, which means it can be optimized using semi-joins.
-<<<<<<< HEAD
-<<<<<<< HEAD
 	
 	
-	\section*{Exercise 4.2}
+	\section*{Exercise 4.3}
 	\subsection*{1.}
 	B = \# buffer pages in memory  = 4 \\
 	N = \# pages in the input file = $\lceil\frac{7500\cdot 36}{1024-64}\rceil = 282$ \\
 	After the initial pass:\\
 	\# runs (subfiles) = $\lceil\frac{N}{B}\rceil = \lceil\frac{282}{4}\rceil= 71$, each subfiles: 4-pages runs\\
 	
-	\subsection*{2}
+	\subsection*{2.}
 	\# passes = $1+ \lceil \log_{B-1}{ \lceil\frac{N}{B}\rceil }\rceil=1+ \lceil \log_{4-1}{ 71 }\rceil=1+4 = 5$\\
 	
-	\subsection*{3}
+	\subsection*{3.}
 	Total costs = $2N\cdot (\# passes) = 2\cdot 282\cdot 5 = 2820$ I/Os\\
 	
-	\subsection*{4}
+	\subsection*{4.}
 	If B = 4:\\
 	$1+ \lceil \log_{3}{ \lceil\frac{N}{B}\rceil }\rceil=2\Rightarrow (\log_3{\lceil\frac{N}{4}\rceil})_{max}=1\Rightarrow (\lceil\frac{N}{4}\rceil)_{max}=3 \Rightarrow N_{max}=12$\\
 	\# records in the file = $\frac{12\cdot (1024-64)}{36}= 320$ records \\
@@ -312,11 +294,7 @@ So there can not exists a function $h: T_3 \rightarrow T_1$. $\Rightarrow T_1 \n
 	If B = 42:\\
 	$1+ \lceil \log_{41}{ \lceil\frac{N}{B}\rceil }\rceil=2\Rightarrow (\log_41{\lceil\frac{N}{42}\rceil})_{max}=1\Rightarrow (\lceil\frac{N}{42}\rceil)_{max}=41 \Rightarrow N_{max}=41\cdot 42 = 1722$\\
 	\# records in the file = $\frac{1722\cdot (1024-64)}{36}= 45920$ records \\
-	
-=======
->>>>>>> b8f283e1ee75d57863bf0f35de0d0914cb4ae613
-=======
->>>>>>> b8f283e1ee75d57863bf0f35de0d0914cb4ae613
+
 \end{document}
 
 
