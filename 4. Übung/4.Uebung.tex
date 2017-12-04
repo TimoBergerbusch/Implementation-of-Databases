@@ -164,13 +164,13 @@
 			
 			\draw[->, thick,anchor=west] (v1) edge node {$e.EmployeeId = c_1.SupportRepId$} (v2) ;
 			
-			\draw[->, thick,anchor=west] (v3) edge node {$c_1.city=c_1.city \land c_1 \neq c_2$} (v2);
+			\draw[->, thick,anchor=west] (v2) edge node {$c_1.city=c_2.city \land c_1 \neq c_2$} (v3);
 			
 			\draw[->, thick, anchor = west] (v1) -| ++(-3,-0.125) node[pos=5.5, left]{$e.EmployeeId=c_2.SupportRepId$} |- (v3);
 		\end{tikzpicture}
 	\end{figure}
 
-	This graph is cycle free, which means the query is optimizable using semi-joins.
+	This Graph has a cycle. This means the query is not optimizable using semi-joins.
 
 	\subsection*{1.b)}
 	$\{<t.name, t.composer> \mid t \in Track \land \exists g\in Genre \land g.GenreId=t.GenreId \land g.Name="Rock" \land \exists art\in Artist \land \exists alb \in Album \land alb.ArtistId=art.ArtistId \land t.AlbumId=alb.AlbumId \land t.Composer=art.Name\}$
@@ -192,14 +192,14 @@
 		
 		\draw[->, thick,anchor=west] (v3) edge node {$art.ArtistId=alb.ArtistId$} (v4);
 		
-		\draw[->, thick,anchor=west] (v4.west) -| ++(-3,0.35) node[pos = 5,above]{$alb.AlbumId=t.AlbumId$} |- (v1.west);
+		\draw[->, thick,anchor=west] (v1.west) -| ++(-3,-0.125) node[pos = 5,above]{$alb.AlbumId=t.AlbumId$} |- (v4.west);
 		\end{tikzpicture}
 	\end{figure}
 
 	This Graph has a cycle. This means the query is not optimizable using semi-joins.
 	
 	\subsection*{2.}
-	$\{<t.Name> \mid t\in Track \land t.Miliseconds \le 90000 \land \exists g \in Genre \land t.GenreId=t.GenreId \land g.Name="Rock" \land \exists m\in MediaType \land t.MediaTypeId=m.MediaTypeid \land m.Name = "MPEG audio file"\}$
+	$\{<t.Name> \mid t\in Track \land t.Miliseconds \le 90000 \land \exists g \in Genre \land t.GenreId=g.GenreId \land g.Name="Rock" \land \exists m\in MediaType \land t.MediaTypeId=m.MediaTypeid \land m.Name = "MPEG audio file"\}$
 	
 	\begin{figure}[H]
 		\centering
