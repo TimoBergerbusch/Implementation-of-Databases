@@ -1,0 +1,177 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.2cm, right=2.2cm]{geometry}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{changepage}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\usepackage{tikz}
+\usetikzlibrary{fit,arrows,calc,positioning}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{datetime}
+\newdateformat{specialdate}{\twodigit{\THEDAY}.\twodigit{\THEMONTH}.\THEYEAR}
+\usepackage{amssymb}
+\usepackage{ifsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{lipsum}  
+
+\newcommand{\blue}[1]{\color{blue}#1\color{black}}
+\newcommand{\red}[1]{\color{red}#1\color{black}}
+\newcommand{\green}[1]{\color{green}#1\color{black}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand\labelenumii{\theenumi.\arabic{enumii}.}
+
+\begin{document}
+	
+	\title{5. Exercise}
+	\author{Timo Bergerbusch 344408 \\ Thomas Näveke 311392 \\ Shu Xing 381176}
+	\date{\specialdate\today}
+	\maketitle
+	
+	\section*{Exercise 5.1}
+	Important numbers:\\
+	\begin{itemize}
+		\item[\textbf{B}:] $\frac{20\,000\,000 \text{ Records}}{40 \frac{\text{Records}}{\text{Page}}}= 500\,000 \text{ Pages}$
+		\item[\textbf{R}:] $40 \frac{\text{Records}}{\text{Page}}$
+	\end{itemize}
+	\subsection*{1.a) $\sigma_{ID=500}$}
+		\underline{Answer:} Use path A3. \\
+		\underline{Explanation:} The unclustered hash index needs only $2D$ I/Os. All other produce higher costs. The clustered $B^+$ tree index would need a $G$ like the following
+		\begin{align*}
+			D\cdot(log_G 0.15B) &\le 2D \\        
+			log_G 75000 &\le 1 \\
+			4.261159991\cdot10^{-411955} &\le G < 1\\
+		\end{align*}\\
+		Such a $G$ is not possible as a tree-branch-factor. So the unlustered hash index is most efficient.
+	\subsection*{1.b) $\sigma_{ID\neq 500}$}
+		\underline{Answer:} Use path A2\\
+		\underline{Explanation:} \\
+			\begin{tabular} {r | l |l}
+				type & formula & cost \\ \hline
+				sorted & $B\cdot D$ & $500\,000D$ \\
+				$B^+$ tree & $0.15BD+1.5BD$ & $825\,000D$ \\
+				hash index & $BD(R+0.125)$ & $20\,062\,500D$
+			\end{tabular}
+	\subsection*{1.c) $\sigma_{ID>500 \land ID<1500}$}
+		\underline{Answer:} \\
+		\underline{Explanation:} \\
+			For the sorted file and the clustered has index the cost would be $B\cdot D = 500\,000D$. For a clustered tree index to be cheaper we have to consider the two variables $G$ as the branching factor of the $B^+$ tree. The number of matching pages is given by $1500-500=1000$. The cost can be computed as $D\cdot (\log_G 0.15B+\# matchingPages) \Rightarrow D\cdot (\log_G 75\,000 + 1000)$. Now for the tree index to be cheaper this has to be $< 500\,000D$.
+			\begin{align*}
+				D\cdot (\log_G 75\,000 + 1000) &< 500\,000D \\
+				\log_G 75\,000 + 1000 &< 500\,000 \\
+				\log_G 75\,000 &< 499\,000 \\
+				G &< \sqrt[499\,000]{75\,000} \approx 1.00002
+			\end{align*}\\
+			%TODO: seems to be false
+	
+	\subsection*{2.a)}
+		%TODO
+	\subsection*{2.b) i.}
+		%TODO
+	\subsection*{2.b) ii.}
+		%TODO
+	\subsection*{2.b) iii.}
+		%TODO
+	\section*{Exercise 5.2}
+	\subsection*{1.}
+		Split the computing into two parts:
+		\begin{itemize}
+			\item Finding the first suitable records\\
+				\begin{enumerate}
+					\item through the stated average size and load we retrieve $0.15\cdot B$ data entries
+					\item the height of such a tree then is given by $log_G 0.15\cdot B$
+					\item Since every one has to be read we multiply it by $D$
+					\item[$\Rightarrow$] $D\cdot(log_G 0.15\cdot B)$
+				\end{enumerate}				
+			\item find first following non-suitable record 
+				We then continue reading the index structure until we encounter a record that is not suitable. Through the clustering we know that there are no suitable records following. So we read the number of suitable records = $\# matchingPages$ many records\\
+				$\Rightarrow$ $D\cdot \# matchingPages$
+			\item[$\Rightarrow$] $D\cdot(log_G 0.15\cdot B) + D\cdot \# matchingPages = D\cdot(log_G 0.15\cdot B + \# matchingPages)$
+		\end{itemize}
+	\subsection*{2.}
+		\begin{itemize}
+			\item read the page of the hash-group, which contains all entries that satisfy the equality $\Rightarrow D$
+			\item read the data entry satisfying the equality $\Rightarrow D$
+			\item[$\Rightarrow$] $D+D=2D$
+		\end{itemize}
+	\subsection*{3.}
+		\begin{itemize}
+			\item the costs of retrieving the file containing the data computes as in Exercise 5.2.1 to $D\cdot (\log_G 0.15\cdot B)$
+			\item the costs of finding the data entry is constant $D$
+			\item rewriting the index page and datafile takes $2D$
+			\item[$\Rightarrow$] $D\cdot (\log_G 0.15\cdot B) + D + 2D = D\cdot (3+\log_G 0.15\cdot B)$
+		\end{itemize}
+	
+	\section*{Exercise 5.3}
+		\begin{itemize}
+			\item Regarding \texttt{Q1}: \\
+				Equality Selection based on its primary key sno: \\
+				\begin{tabular}{r | l | l}
+					type & formula & cost \\ \hline
+					heap & $\frac{1}{2}BD$ & $500D$ \\
+					Sorted & $D\cdot \log_2 B$ & $9.97D$\\
+					Clustered Tree Index & $D\cdot (1+ \log_G 0.15B)$ & $2.09D$ \\
+					Unclustered Tree Index & $D\cdot (1+ \log_G 0.15B)$ & $2.09D$\\
+					Unclustered Hash Index & $2D$ & $2D$ \\
+				\end{tabular}
+				$\Rightarrow$ for \texttt{Q1} a unclustered hash index on sno would be the best option. A(n) (un)clustered tree index would only be very slightly less efficient.
+			\item Regarding \texttt{Q2}: \\
+				Range Selection based on the salary:\\
+				Obviously a tree index is the most efficient for such queries. Also having a clustered tree index would be more efficient than an unclustered tree index, since otherwise \underline{each} suitable records would cost 1 page I/O. A clustered tree index can read the records continuously which results in less page I/Os.\\
+				So a clustered tree index would be the best choice. 
+			\item Regarding \texttt{Q3}: \\
+				maybe indexing sno? %TODO
+		\end{itemize}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
