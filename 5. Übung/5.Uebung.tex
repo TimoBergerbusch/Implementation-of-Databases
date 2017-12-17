@@ -139,22 +139,22 @@ EggInNest: $\dfrac{2000bytes/page}{50bytes/record}=40$ records/page $\Rightarrow
 					\item Since every one has to be read we multiply it by $D$
 					\item[$\Rightarrow$] $D\cdot(log_G 0.15\cdot B)$
 				\end{enumerate}				
-			\item find first following non-suitable record 
+			\item find first following non-suitable record\\ 
 				We then continue reading the index structure until we encounter a record that is not suitable. Through the clustering we know that there are no suitable records following. So we read the number of suitable records = $\# matchingPages$ many records\\
 				$\Rightarrow$ $D\cdot \# matchingPages$
 			\item[$\Rightarrow$] $D\cdot(log_G 0.15\cdot B) + D\cdot \# matchingPages = D\cdot(log_G 0.15\cdot B + \# matchingPages)$
 		\end{itemize}
 	\subsection*{2.}
 		\begin{itemize}
-			\item read the page of the hash-group, which contains all entries that satisfy the equality $\Rightarrow D$
-			\item read the data entry satisfying the equality $\Rightarrow D$
+			\item read the page of the hash-group(bucket), which contains all entries that satisfy the equality $\Rightarrow D$
+			\item identify and retrieve the data page containing the record $\Rightarrow D$
 			\item[$\Rightarrow$] $D+D=2D$
 		\end{itemize}
 	\subsection*{3.}
 		\begin{itemize}
-			\item the costs of retrieving the file containing the data computes as in Exercise 5.2.1 to $D\cdot (\log_G 0.15\cdot B)$
-			\item the costs of finding the data entry is constant $D$
-			\item rewriting the index page and datafile takes $2D$
+			\item the costs of finding the data entry $D\cdot (\log_G 0.15\cdot B)$
+			\item the costs of retrieving the data page containing the record $D$
+			\item delete the record in data page and modify the index page, and write them out $2D$
 			\item[$\Rightarrow$] $D\cdot (\log_G 0.15\cdot B) + D + 2D = D\cdot (3+\log_G 0.15\cdot B)$
 		\end{itemize}
 	
@@ -169,14 +169,15 @@ EggInNest: $\dfrac{2000bytes/page}{50bytes/record}=40$ records/page $\Rightarrow
 					Clustered Tree Index & $D\cdot (1+ \log_G 0.15B)$ & $2.09D$ \\
 					Unclustered Tree Index & $D\cdot (1+ \log_G 0.15B)$ & $2.09D$\\
 					Unclustered Hash Index & $2D$ & $2D$ \\
-				\end{tabular}
-				$\Rightarrow$ for \texttt{Q1} a unclustered hash index on sno would be the best option. A(n) (un)clustered tree index would only be very slightly less efficient.
+				\end{tabular}\\
+				$\Rightarrow$ for \texttt{Q1} an unclustered hash index on sno would be the best option. A(n) (un)clustered tree index would only be very slightly less efficient.
 			\item Regarding \texttt{Q2}: \\
 				Range Selection based on the salary:\\
 				Obviously a tree index is the most efficient for such queries. Also having a clustered tree index would be more efficient than an unclustered tree index, since otherwise \underline{each} suitable records would cost 1 page I/O. A clustered tree index can read the records continuously which results in less page I/Os.\\
-				So a clustered tree index would be the best choice. 
+				So a clustered tree index would be the best choice, with the estimated costs are $D(1.1+\#matchingPages)$. 
 			\item Regarding \texttt{Q3}: \\
-				maybe indexing sno? %TODO
+				%maybe indexing sno? %TODO
+			 In order to compute the aggregate, we can use a tree index with the search key (dno,marstat), then can do an index-only scan, with the estimated costs 150D.
 		\end{itemize}
 \end{document}
 
