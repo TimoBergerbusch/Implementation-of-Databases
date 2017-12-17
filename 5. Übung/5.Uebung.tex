@@ -69,16 +69,21 @@
 		\item[\textbf{R}:] $40 \frac{\text{Records}}{\text{Page}}$
 	\end{itemize}
 	\subsection*{1.a) $\sigma_{ID=500}$}
-		\underline{Answer:} Use path A3. \\
-		\underline{Explanation:} The unclustered hash index needs only $2D$ I/Os. All other produce higher costs. The clustered $B^+$ tree index would need a $G$ like the following
-		\begin{align*}
-			D\cdot(log_G 0.15B) &\le 2D \\        
-			log_G 75000 &\le 1 \\
-			4.261159991\cdot10^{-411955} &\le G < 1\\
-		\end{align*}\\
-		Such a $G$ is not possible as a tree-branch-factor. So the unlustered hash index is most efficient.
+		\underline{Answer:} Use path A3 for this Equality Selection. \\
+		\underline{Explanation:} \\%The unclustered hash index needs only $2D$ I/Os. All other produce higher costs. The clustered $B^+$ tree index would need a $G$ like the following
+		%\begin{align*}
+		%	D\cdot(log_G 0.15B) &\le 2D \\        
+		%	log_G 75000 &\le 1 \\
+		%	4.261159991\cdot10^{-411955} &\le G < 1\\
+		%\end{align*}\\
+		%Such a $G$ is not possible as a tree-branch-factor. So the unlustered hash index is most efficient.
+         Sorted: $Dlog_2{B}\approx 19D$ \\
+		Clustered $B^+$ tree: $D(1+log_{G}{0.15B})$ \\
+		Hash index: $2D<19D$\\
+		If A2 is cheapest, then $D(1+log_{G}{0.15B})<2D\Rightarrow log_{G}{75000}<1\Rightarrow G>75000$, unpractical!
+		
 	\subsection*{1.b) $\sigma_{ID\neq 500}$}
-		\underline{Answer:} Use path A2\\
+		\underline{Answer:} Use path A1 for this scan of relation\\
 		\underline{Explanation:} \\
 			\begin{tabular} {r | l |l}
 				type & formula & cost \\ \hline
@@ -87,25 +92,42 @@
 				hash index & $BD(R+0.125)$ & $20\,062\,500D$
 			\end{tabular}
 	\subsection*{1.c) $\sigma_{ID>500 \land ID<1500}$}
-		\underline{Answer:} \\
+		\underline{Answer:} A2 for range selection\\
 		\underline{Explanation:} \\
-			For the sorted file and the clustered has index the cost would be $B\cdot D = 500\,000D$. For a clustered tree index to be cheaper we have to consider the two variables $G$ as the branching factor of the $B^+$ tree. The number of matching pages is given by $1500-500=1000$. The cost can be computed as $D\cdot (\log_G 0.15B+\# matchingPages) \Rightarrow D\cdot (\log_G 75\,000 + 1000)$. Now for the tree index to be cheaper this has to be $< 500\,000D$.
-			\begin{align*}
-				D\cdot (\log_G 75\,000 + 1000) &< 500\,000D \\
-				\log_G 75\,000 + 1000 &< 500\,000 \\
-				\log_G 75\,000 &< 499\,000 \\
-				G &< \sqrt[499\,000]{75\,000} \approx 1.00002
-			\end{align*}\\
+%			For the sorted file and the clustered has index the cost would be $B\cdot D = 500\,000D$. For a clustered tree index to be cheaper we have to consider the two variables $G$ as the branching factor of the $B^+$ tree. The number of matching pages is given by $1500-500=1000$. The cost can be computed as $D\cdot (\log_G 0.15B+\# matchingPages) \Rightarrow D\cdot (\log_G 75\,000 + 1000)$. Now for the tree index to be cheaper this has to be $< 500\,000D$.
+%			\begin{align*}
+%				D\cdot (\log_G 75\,000 + 1000) &< 500\,000D \\
+%				\log_G 75\,000 + 1000 &< 500\,000 \\
+%				\log_G 75\,000 &< 499\,000 \\
+%				G &< \sqrt[499\,000]{75\,000} \approx 1.00002
+%			\end{align*}\\
 			%TODO: seems to be false
+		Sorted: $D(log_2{B}+\#matchingPages)$ \\
+		Clustered $B^+$ tree: $D(log_{G}{0.15B}+\#matchingPages)$ \\
+		Hash index: $BD=500\,000D$, obviously larger than the other two.\\
+		If cost(A2)$<$cost(A1), then $log_{G}{0.15B})<log_2{B}\approx 19\Rightarrow G>75\,000^{\dfrac{1}{19}}\approx1.8\Rightarrow G\geq 2$. So usually A2 is cheaper than A1.
 	
+	\subsection*{2}
+	Nest: 200 bytes/record, 200 tuples\\
+	Egg: 10 bytes/record, 5000 tuples\\
+	EggInNest: 50 bytes/ record, 100\,000 tuples\\
+	2000 bytes/page, 7 buffer pages, cost(an index access)=2 I/Os 
 	\subsection*{2.a)}
-		%TODO
+Nest: $\dfrac{2000bytes/page}{200bytes/record}=10$ records/page $\Rightarrow\dfrac{200 records}{10 records/page}=20$ pages\\
+Egg: $\dfrac{2000bytes/page}{10bytes/record}=200$ records/page $\Rightarrow\dfrac{5000 records}{200 records/page}=25$ pages\\
+EggInNest: $\dfrac{2000bytes/page}{50bytes/record}=40$ records/page $\Rightarrow\dfrac{100\,000 records}{40 records/page}=2500$ pages\\
 	\subsection*{2.b) i.}
-		%TODO
+	Costs for using block-nested loop join:\\
+	M=25 I/Os, N=2500I/Os, B=7\\
+	Costs=$M+\lceil \dfrac{M}{B-2} \rceil\ast N = 25+\lceil \dfrac{25}{7-2}\rceil \ast 2500=12525$ I/Os \\
 	\subsection*{2.b) ii.}
-		%TODO
+	Costs for using index-nested loop join with a clustered hash index:\\
+	There exists a hash index on eid on Egg. $\Rightarrow$ Loop of Egg is the inner loop.\\
+	M=2500 I/Os, N=25 I/Os\\
+	Costs=$M+(tuplesOfOutLoop\ast CostOfFindingMatchingInnerTuples)=2500+100\,000\times 2=202500$ I/Os
 	\subsection*{2.b) iii.}
-		%TODO
+	Both relations are sorted on join colum. $\Rightarrow$ The Sort-Merge Join is the best with\\
+	costs = M+N = 2500 + 25 = 2525 I/Os
 	\section*{Exercise 5.2}
 	\subsection*{1.}
 		Split the computing into two parts:
