@@ -213,11 +213,36 @@ The order of actions except for commits in $s_4$ is same with this in $s_3$, so 
 		
 		
 	\section*{Exercise 7.3(B+-tree Locking)}
-	\subsection*{7.2.1}
-		
-	\subsection*{7.2.2}
+	\subsection*{7.3.1}
+	Search 52:\\
+	$rl(A)$\\
+	$rl(C)$\\
+	$ru(A)$\\
+	$rl(G)$\\
+	$ru(C)$\\
+	$r(G)\leftarrow $read 52 \\
+	$ru(G)$\\
+	\subsection*{7.3.2}
+	Insert 19:\\
+	$wl(A)$\\
+	$wl(B)$\\
+	$wu(A)\leftarrow$ B is not full.\\
+	$wl(E)$\\
+	$wu(B)\leftarrow $E is not full.\\
+	$w(E)\leftarrow$ insert 19\\
+	$wu(E)$\\
 	
-	\subsection*{7.2.3}
+	\subsection*{7.3.3}
+	Delete 30:\\
+	$wl(A)$\\
+	$wl(C)\leftarrow$ half-empty\\
+	$wl(F)\leftarrow$ half-empty\\
+	$w(F)\leftarrow$delete 30\\
+	$redistribute(C,F,G)\leftarrow$ merge and redistribute\\
+	$delete(F)$\\
+	$redistribute(A,B,C)\leftarrow$update\\
+	$wu(A)$\\
+	$wu(C)$\\
 	
 \end{document}
 
