@@ -148,8 +148,61 @@ where the $DT(s')=r_0(A)w_0(A)r_0(B)w_0(B)c_0 r_1(A)r_1(B)c_1$, and its conflict
 where $DT(s'')=r_0(A)w_0(A)r_1(A)r_1(B)c_1 r_0(B)w_0(B)c_0$, and its conflict graph is cyclic with $conflict(DT(s''))=\lbrace(w_0(A),r_1(A)), (r_1(B), w_0(B)) \rbrace$. So the lock leads to a not conflict serializable schedule.	
 	
 	\subsection*{7.1.4}
-	
+	$s_1 = r_1(z)r_2(x)w_1(x)r_3(y)w_3(y)r_2(z)w_2(y)w_1(z)c_1c_2c_3$\\
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[node distance = 3cm,scale=.8, every node/.style={circle,anchor=west}]
+			\node[draw] (v1) at (0,0) {$t1$};
+			\node[draw] (v2) at (3,0) {$t2$};
+			\node[draw] (v3) at (6,0) {$t3$};
+			\draw[->] (v2) edge (v1) ;	
+			\draw[->] (v3) edge (v2) ;	
+		\end{tikzpicture}
+	\end{figure} 
 
+The conflict graph is acyclic, so $s_1\in CSR$.\\
+There is no non-overlapped transactions in $s_1$, so $s_1\in OCSR$.\\
+Commits in $s_1$ is $c_1c_2c_3$, not in the "conflict order" $t_3t_2t_1$, so $s_1\notin CO$.\\
+\\
+$s_2 = r_3(y)w_3(y)r_2(x)r_2(z)w_2(y)r_1(z)w_1(x)w_1(z)c_3c_2c_1$\\
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[node distance = 3cm,scale=.8, every node/.style={circle,anchor=west}]
+			\node[draw] (v1) at (0,0) {$t1$};
+			\node[draw] (v2) at (3,0) {$t2$};
+			\node[draw] (v3) at (6,0) {$t3$};
+			\draw[->] (v2) edge (v1) ;	
+			\draw[->] (v3) edge (v2) ;	
+		\end{tikzpicture}
+	\end{figure} 
+	
+The conflict graph is acyclic, so $s_2\in CSR$.\\
+Commits in $s_2$ is $c_3c_2c_1$, in the "conflict order" $t_3t_2t_1$, so $s_1\in CO$, and also $s_1\in OCSR$.\\	
+\\
+$s_3 = r_1(z)r_3(z)w_3(x)w_2(z)c_3r_4(x)w_4(z)c_2r_5(z)c_4w_5(y)w_1(y)c_1c_5$\\
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[node distance = 3cm,scale=.8, every node/.style={circle,anchor=west}]
+			\node[draw] (v1) at (0,0) {$t1$};
+			\node[draw] (v2) at (3,0) {$t2$};
+			\node[draw] (v3) at (6,0) {$t3$};
+			\node[draw] (v4) at (4.5, -2) {$t2$};
+			\node[draw] (v5) at (1.5,-2) {$t3$};
+			\draw[->] (v1) edge (v2) ;	
+			\draw[->] (v3) edge (v2) ;	
+			\draw[->] (v1) edge (v4) ;	
+			\draw[->] (v2) edge (v4) ;	
+			\draw[->] (v2) edge (v5) ;	
+			\draw[->] (v3) edge (v4) ;	
+			\draw[->] (v5) edge (v1) ;	
+			\draw[->] (v4) edge (v5) ;	
+		\end{tikzpicture}
+	\end{figure} 
+	
+The conflict graph contains cycles, so $s_3\notin CSR$, as well as $s_3\notin OCSR$, $s_3\notin OC$. \\
+\\
+$s_4 = r_1(z)r_3(z)w_3(x)w_2(z)r_4(x)c_2w_4(z)c_4r_5(z)c_3w_5(y)c_5w_1(y)c_1$\\
+The order of actions except for commits in $s_4$ is same with this in $s_3$, so they have same conflict graph. Thus, $s_4\notin CSR$, as well as $s_4\notin OCSR$, $s_4\notin OC$.
 	\section*{Exercise 7.2(Recovery)}
 	\subsection*{7.2.1}
 		
