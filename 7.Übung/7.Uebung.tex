@@ -251,8 +251,10 @@ The order of actions except for commits in $s_4$ is same with this in $s_3$, so 
 	\subsection*{7.3.1}
 	Search 52:\\
 	$rl(A)$\\
+	$r(A)$\\
 	$rl(C)$\\
 	$ru(A)$\\
+	$r(C)$\\
 	$rl(G)$\\
 	$ru(C)$\\
 	$r(G)\leftarrow $read 52 \\
@@ -260,24 +262,40 @@ The order of actions except for commits in $s_4$ is same with this in $s_3$, so 
 	\subsection*{7.3.2}
 	Insert 19:\\
 	$wl(A)$\\
+	$r(A)$\\
 	$wl(B)$\\
-	$wu(A)\leftarrow$ B is not full.\\
+	$r(B)$\\
+	$wu(A)\leftarrow$ because B is not full.\\
 	$wl(E)$\\
-	$wu(B)\leftarrow $E is not full.\\
+	$r(E)$\\
+	$wu(B)\leftarrow $ because E is not full.\\
 	$w(E)\leftarrow$ insert 19\\
 	$wu(E)$\\
 	
 	\subsection*{7.3.3}
 	Delete 30:\\
 	$wl(A)$\\
-	$wl(C)\leftarrow$ half-empty\\
-	$wl(F)\leftarrow$ half-empty\\
-	$w(F)\leftarrow$delete 30\\
-	$redistribute(C,F,G)\leftarrow$ merge and redistribute\\
+	$r(A)$\\
+	$wl(C)$ \\
+	$r(C)\leftarrow$ C is half-empty, so cannot unlock acestor.\\
+	$wl(F)$ \\
+	$r(F)\leftarrow$ F is half-empty, so cannot unlock acestors.\\
+	$w(F)\leftarrow$delete 30, and needs to merge with its sibling\\
+	$wl(G)$\\
+	$r(G)$\\
+	$create(M_1)\leftarrow$ merge F and G\\
 	$delete(F)$\\
-	$redistribute(A,B,C)\leftarrow$update\\
-	$wu(A)$\\
-	$wu(C)$\\
+	$delete(G)$\\
+	$w(C)\leftarrow$ delete the "split key" 44, then need to merge with its sibling\\
+	$wl(B)$\\
+	$r(B)$\\
+	$create(M_2)\leftarrow$ merge C and B, incorporate the "split key" in A\\
+	$delete(B)$\\
+	$delete(C)$\\
+	$w(A)\leftarrow$ delete the "split key" 23, then the root is empty\\
+	$delete(A)$\\
+	$wu(M_2)\leftarrow$ the new root\\
+	$wu(M_1)$\\
 	
 \end{document}
 
